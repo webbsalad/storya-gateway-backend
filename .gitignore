@@ -1,0 +1,3 @@
+vendor.protogen
+api
+internal/pb/api

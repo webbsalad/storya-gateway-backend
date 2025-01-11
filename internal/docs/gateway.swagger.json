@@ -1,0 +1,1207 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "api/passport/passport_service.proto",
+    "version": "version not set"
+  },
+  "paths": {
+    "/confirm-otp": {
+      "post": {
+        "tags": [
+          "OtpService"
+        ],
+        "operationId": "OtpService_ConfirmOtp",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/otpConfirmOtpRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/otpConfirmOtpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/content/{contentType}": {
+      "patch": {
+        "tags": [
+          "UserContentService"
+        ],
+        "operationId": "UserContentService_Add",
+        "parameters": [
+          {
+            "enum": [
+              "MOVIE",
+              "GAME",
+              "BOOK"
+            ],
+            "type": "string",
+            "name": "contentType",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserContentServiceAddBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/content/{contentType}/{itemId}": {
+      "delete": {
+        "tags": [
+          "UserContentService"
+        ],
+        "operationId": "UserContentService_Remove",
+        "parameters": [
+          {
+            "enum": [
+              "MOVIE",
+              "GAME",
+              "BOOK"
+            ],
+            "type": "string",
+            "name": "contentType",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "itemId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/content/{contentType}/{userId}": {
+      "get": {
+        "tags": [
+          "UserContentService"
+        ],
+        "operationId": "UserContentService_GetUserItems",
+        "parameters": [
+          {
+            "enum": [
+              "MOVIE",
+              "GAME",
+              "BOOK"
+            ],
+            "type": "string",
+            "name": "contentType",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "userId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contentGetUserItemsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/content/{contentType}/{userId}/{value}": {
+      "get": {
+        "tags": [
+          "UserContentService"
+        ],
+        "operationId": "UserContentService_GetValued",
+        "parameters": [
+          {
+            "enum": [
+              "MOVIE",
+              "GAME",
+              "BOOK"
+            ],
+            "type": "string",
+            "name": "contentType",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "userId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "enum": [
+              "Like",
+              "Neutral",
+              "Dislike"
+            ],
+            "type": "string",
+            "name": "value",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contentGetValuedResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/emails/{emailId}": {
+      "delete": {
+        "tags": [
+          "PassportService"
+        ],
+        "operationId": "PassportService_Delete",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "emailId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/items": {
+      "post": {
+        "tags": [
+          "ContentService"
+        ],
+        "operationId": "ContentService_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/contentCreateItemRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contentItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/items/{contentType}/{count}": {
+      "get": {
+        "tags": [
+          "ContentService"
+        ],
+        "operationId": "ContentService_GetRand",
+        "parameters": [
+          {
+            "enum": [
+              "MOVIE",
+              "GAME",
+              "BOOK"
+            ],
+            "type": "string",
+            "name": "contentType",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "name": "count",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contentGetRandResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/items/{contentType}/{itemId}": {
+      "get": {
+        "tags": [
+          "ContentService"
+        ],
+        "operationId": "ContentService_Get",
+        "parameters": [
+          {
+            "enum": [
+              "MOVIE",
+              "GAME",
+              "BOOK"
+            ],
+            "type": "string",
+            "name": "contentType",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "itemId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contentItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/items/{type}/{itemId}": {
+      "delete": {
+        "tags": [
+          "ContentService"
+        ],
+        "operationId": "ContentService_Delete",
+        "parameters": [
+          {
+            "enum": [
+              "MOVIE",
+              "GAME",
+              "BOOK"
+            ],
+            "type": "string",
+            "name": "type",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "itemId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ContentService"
+        ],
+        "operationId": "ContentService_Update",
+        "parameters": [
+          {
+            "enum": [
+              "MOVIE",
+              "GAME",
+              "BOOK"
+            ],
+            "type": "string",
+            "name": "type",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "itemId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContentServiceUpdateBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contentItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/log-out": {
+      "delete": {
+        "tags": [
+          "PassportService"
+        ],
+        "operationId": "PassportService_LogOut",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "PassportService"
+        ],
+        "operationId": "PassportService_LogIn",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/passportLogInRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportLogInResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/new-rec": {
+      "get": {
+        "tags": [
+          "RecsService"
+        ],
+        "operationId": "RecsService_GetNewRec",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "userId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/recsGetNewRecResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/preferences/{userId}": {
+      "get": {
+        "tags": [
+          "RecsService"
+        ],
+        "operationId": "RecsService_GetPreferences",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "userId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/recsGetPreferencesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "RecsService"
+        ],
+        "operationId": "RecsService_UpdatePreferences",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "userId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/recsUpdatePreferencesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/refresh": {
+      "post": {
+        "tags": [
+          "PassportService"
+        ],
+        "operationId": "PassportService_RefreshToken",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/passportRefreshTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportRefreshTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": [
+          "PassportService"
+        ],
+        "operationId": "PassportService_Register",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/passportRegisterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportRegisterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/send-otp": {
+      "post": {
+        "tags": [
+          "OtpService"
+        ],
+        "operationId": "OtpService_SendOtp",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/otpSendOtpRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "delete": {
+        "tags": [
+          "RecsService"
+        ],
+        "operationId": "RecsService_DeletePeferences",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "PassportService"
+        ],
+        "operationId": "PassportService_GetUser",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "userId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PassportService"
+        ],
+        "operationId": "PassportService_UpdateUser",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "userId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PassportServiceUpdateUserBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContentServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/contentTag"
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PassportServiceUpdateUserBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserContentServiceAddBody": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/contentValue"
+        }
+      }
+    },
+    "contentContentType": {
+      "type": "string",
+      "default": "MOVIE",
+      "enum": [
+        "MOVIE",
+        "GAME",
+        "BOOK"
+      ]
+    },
+    "contentCreateItemRequest": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/contentTag"
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/contentContentType"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "contentGetListResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/contentItem"
+          }
+        }
+      }
+    },
+    "contentGetRandResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/contentItem"
+          }
+        }
+      }
+    },
+    "contentGetUserItemsResponse": {
+      "type": "object",
+      "properties": {
+        "userItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/contentUserItem"
+          }
+        }
+      }
+    },
+    "contentGetValuedResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/contentItem"
+          }
+        }
+      }
+    },
+    "contentItem": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/contentTag"
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/contentContentType"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "contentTag": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "contentUserItem": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/contentItem"
+        },
+        "value": {
+          "$ref": "#/definitions/contentValue"
+        }
+      }
+    },
+    "contentValue": {
+      "type": "string",
+      "default": "Like",
+      "enum": [
+        "Like",
+        "Neutral",
+        "Dislike"
+      ]
+    },
+    "otpConfirmOtpRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "otpCode": {
+          "type": "string"
+        }
+      }
+    },
+    "otpConfirmOtpResponse": {
+      "type": "object",
+      "properties": {
+        "emailId": {
+          "type": "string"
+        }
+      }
+    },
+    "otpSendOtpRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "passportCheckTokenResponse": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string"
+        },
+        "tokenType": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "passportLogInRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "passportLogInResponse": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    },
+    "passportRefreshTokenRequest": {
+      "type": "object",
+      "properties": {
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    },
+    "passportRefreshTokenResponse": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    },
+    "passportRegisterRequest": {
+      "type": "object",
+      "properties": {
+        "emailId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "passportRegisterResponse": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    },
+    "passportUser": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "emailId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "recsGetNewRecResponse": {
+      "type": "object",
+      "properties": {
+        "itemIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "recsGetPreferencesResponse": {
+      "type": "object",
+      "properties": {
+        "preferences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/recsPreference"
+          }
+        }
+      }
+    },
+    "recsPreference": {
+      "type": "object",
+      "properties": {
+        "tag": {
+          "$ref": "#/definitions/recsTag"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "recsRatedTag": {
+      "type": "object",
+      "properties": {
+        "tag": {
+          "$ref": "#/definitions/recsTag"
+        },
+        "value": {
+          "$ref": "#/definitions/recsValue"
+        }
+      }
+    },
+    "recsTag": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "recsUpdatePreferencesResponse": {
+      "type": "object",
+      "properties": {
+        "preferences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/recsPreference"
+          }
+        }
+      }
+    },
+    "recsValue": {
+      "type": "string",
+      "default": "Like",
+      "enum": [
+        "Like",
+        "Neutral",
+        "Dislike"
+      ]
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PassportService"
+    },
+    {
+      "name": "OtpService"
+    },
+    {
+      "name": "ContentService"
+    },
+    {
+      "name": "UserContentService"
+    },
+    {
+      "name": "RecsService"
+    }
+  ]
+}
